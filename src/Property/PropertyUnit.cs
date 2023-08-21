@@ -154,5 +154,19 @@ public enum PropertyUnit
     /// <summary>
     /// Variable unit, will depend on the version of the implemented structure, please see the documentation of the property to know the correct unit.
     /// </summary>
-    Variable
+    Variable,
+    /// <summary>
+    /// Bits per color
+    /// </summary>
+    BitsxColor,
+
+    /// <summary>
+    /// Candela per square meter
+    /// </summary>
+    cdm2,
+
+    /// <summary>
+    /// Bits per component
+    /// </summary>
+    bpc
 }
