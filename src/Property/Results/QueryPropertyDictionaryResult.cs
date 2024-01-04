@@ -1,8 +1,7 @@
 ﻿
-using System.Collections.Generic;
+using System;
 
 using iTin.Core.ComponentModel;
-
 using iTin.Core.Hardware.Common.ComponentModel;
 
 namespace iTin.Core.Hardware.Common;
@@ -22,7 +21,8 @@ public class QueryPropertyDictionaryResult : ResultBase<PropertyItemDictionary>
     /// <returns>
     /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed error.
     /// </returns>
-    public static QueryPropertyDictionaryResult CreateErroResult(string message, string code = "") => CreateErroResult(new IResultError[] { new ResultError { Code = code, Message = message } });
+    public new static QueryPropertyDictionaryResult CreateErrorResult(string message, string code = "") => 
+        CreateErrorResult([new ResultError { Code = code, Message = message }]);
 
     /// <summary>
     /// Returns a new <see cref="QueryPropertyDictionaryResult"/> with specified detailed error.
@@ -33,38 +33,37 @@ public class QueryPropertyDictionaryResult : ResultBase<PropertyItemDictionary>
     /// <returns>
     /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed error.
     /// </returns>
-    public static QueryPropertyDictionaryResult CreateErroResult(string message, PropertyItemDictionary result, string code = "") => CreateErroResult(new IResultError[] { new ResultError { Code = code, Message = message } }, result);
+    public new static QueryPropertyDictionaryResult CreateErrorResult(string message, PropertyItemDictionary result, string code = "") => 
+        CreateErrorResult([new ResultError { Code = code, Message = message }], result);
 
     /// <summary>
-    /// Returns a new <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors collection.
+    /// Returns a new <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors' collection.
     /// </summary>
     /// <param name="errors">A errors collection</param>
     /// <returns>
-    /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors collection.
+    /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors' collection.
     /// </returns>
-    public static QueryPropertyDictionaryResult CreateErroResult(IResultError[] errors) =>
-        new()
-        {
-            Result = default,
-            Success = false,
-            Errors = (IResultError[])errors.Clone()
-        };
+    public new static QueryPropertyDictionaryResult CreateErrorResult(IResultError[] errors) => new()
+    {
+        Result = default,
+        Success = false,
+        Errors = (IResultError[])errors.Clone()
+    };
 
     /// <summary>
-    /// Returns a new <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors collection.
+    /// Returns a new <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors' collection.
     /// </summary>
     /// <param name="errors">A errors collection</param>
     /// <param name="result">Result Result</param>
     /// <returns>
-    /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors collection.
+    /// A new invalid <see cref="QueryPropertyDictionaryResult"/> with specified detailed errors' collection.
     /// </returns>
-    public static QueryPropertyDictionaryResult CreateErroResult(IResultError[] errors, PropertyItemDictionary result) =>
-        new()
-        {
-            Result = result,
-            Success = false,
-            Errors = (IResultError[])errors.Clone()
-        };
+    public new static QueryPropertyDictionaryResult CreateErrorResult(IResultError[] errors, PropertyItemDictionary result) => new()
+    {
+        Result = result,
+        Success = false,
+        Errors = (IResultError[])errors.Clone()
+    };
 
     /// <summary>
     /// Returns a new success result.
@@ -73,13 +72,12 @@ public class QueryPropertyDictionaryResult : ResultBase<PropertyItemDictionary>
     /// <returns>
     /// A new valid <see cref="QueryPropertyDictionaryResult"/>.
     /// </returns>
-    public new static QueryPropertyDictionaryResult CreateSuccessResult(PropertyItemDictionary result) =>
-        new()
-        {
-            Result = result,
-            Success = true,
-            Errors = new List<IResultError>()
-        };
+    public new static QueryPropertyDictionaryResult CreateSuccessResult(PropertyItemDictionary result) => new()
+    {
+        Result = result,
+        Success = true,
+        Errors = Array.Empty<IResultError>()
+    };
 
     /// <summary>
     /// Creates a new <see cref="QueryPropertyDictionaryResult"/> instance from known exception.
@@ -88,7 +86,8 @@ public class QueryPropertyDictionaryResult : ResultBase<PropertyItemDictionary>
     /// <returns>
     /// A new <see cref="QueryPropertyDictionaryResult"/> instance for specified exception.
     /// </returns>
-    public new static QueryPropertyDictionaryResult FromException(System.Exception exception) => FromException(exception, default);
+    public new static QueryPropertyDictionaryResult FromException(Exception exception) =>
+        FromException(exception, default);
 
     /// <summary>
     /// Creates a new <see cref="QueryPropertyDictionaryResult"/> instance from known exception.
@@ -98,11 +97,10 @@ public class QueryPropertyDictionaryResult : ResultBase<PropertyItemDictionary>
     /// <returns>
     /// A new <see cref="QueryPropertyDictionaryResult"/> instance for specified exception.
     /// </returns>
-    public new static QueryPropertyDictionaryResult FromException(System.Exception exception, PropertyItemDictionary result) =>
-        new()
-        {
-            Result = result,
-            Success = false,
-            Errors = new List<IResultError> { new ResultExceptionError { Exception = exception } }
-        };
+    public new static QueryPropertyDictionaryResult FromException(Exception exception, PropertyItemDictionary result) => new()
+    {
+        Result = result,
+        Success = false,
+        Errors = new ResultExceptionError { Exception = exception }.Yield()
+    };
 }

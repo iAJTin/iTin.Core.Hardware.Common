@@ -12,7 +12,7 @@ public sealed class PropertyTypeAttribute : Attribute
     #region constructor/s
 
     /// <summary>
-    /// Initialize a new instance of the <see cref="T:iTin.Core.Hardware.PropertyTypeAttribute" /> class by setting the type of property value.
+    /// Initialize a new instance of the <see cref="PropertyTypeAttribute"/> class by setting the type of property value.
     /// </summary>
     /// <param name="propertyType">Type of property value.</param>
     public PropertyTypeAttribute(Type propertyType)

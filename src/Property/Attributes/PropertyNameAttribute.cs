@@ -12,7 +12,7 @@ public sealed class PropertyNameAttribute : Attribute
     #region constructor/s
 
     /// <summary>
-    /// Initialize a new instance of the <see cref="T:iTin.Core.Hardware.PropertyDescriptionAttribute" /> class by setting a string that defines the property's name.
+    /// Initialize a new instance of the <see cref="PropertyDescriptionAttribute" /> class by setting a string that defines the property's name.
     /// </summary>
     /// <param name="name">String that defines the property</param>
     public PropertyNameAttribute(string name)
@@ -28,7 +28,7 @@ public sealed class PropertyNameAttribute : Attribute
     /// Gets a string that defines the property.
     /// </summary>
     /// <value>
-    /// <see cref="T:System.String"/> that defines the property.
+    /// <see cref="string"/> that defines the property.
     /// </value>
     public string Name { get; }
 

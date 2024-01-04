@@ -7,12 +7,12 @@ namespace iTin.Core.Hardware.Common;
 public enum PropertyUnit
 {
     /// <summary>
-    /// Adimensional
+    /// Dimensionless
     /// </summary>
     None,
 
     /// <summary>
-    /// Adimensional
+    /// Percent
     /// </summary>
     xcent,
 

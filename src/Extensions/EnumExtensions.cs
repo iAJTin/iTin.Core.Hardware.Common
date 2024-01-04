@@ -1,65 +1,61 @@
 
 using System;
 using System.ComponentModel;
-using System.Reflection;
+
+using iTin.Core.ComponentModel;
 
 namespace iTin.Core.Hardware.Common;
 
 /// <summary>
-/// Static class than contains extension methods for items of type <see cref="T:System.Enum" />.
+/// Provides extension methods for working with enums.
 /// </summary>
 public static class EnumExtensions
 {
     /// <summary>
-    /// Returns the value of attribute of type <see cref="T:Syntec.Core.ComponentModel.EnumDescriptionAttribute"/> for this enum value. 
-    /// If this attribute is not defined returns <b>null</b> (<b>Nothing</b> in Visual Basic)
+    /// Returns the value of attribute of type <see cref="EnumDescriptionAttribute"/> for this enum value. 
+    /// If this attribute is not defined returns <see langword="null"/>.
     /// </summary>
     /// <param name="value">Target enum value.</param>
     /// <returns>
-    /// A <see cref="T:System.String"/> that contains the value of attribute.
+    /// A <see cref="string"/> that contains the value of attribute.
     /// </returns>
     public static string GetPropertyDescription(this Enum value)
     {
-        Type type = value.GetType();
-        string name = Enum.GetName(type, value);
+        var type = value.GetType();
+        var name = Enum.GetName(type, value);
         if (name == null)
         {
             return null;
         }
 
-        FieldInfo field = type.GetField(name);
+        var field = type.GetField(name);
         if (field == null)
         {
             return null;
         }
 
         DescriptionAttribute attr = Attribute.GetCustomAttribute(field, typeof(PropertyDescriptionAttribute)) as PropertyDescriptionAttribute;
-        if (attr != null)
-        {
-            return attr.Description;
-        }
-
-        return null;
+        return attr?.Description;
     }
 
     /// <summary>
-    /// Returns the value of attribute of type <see cref="T:Syntec.Core.ComponentModel.EnumDescriptionAttribute"/> for this enum value. 
-    /// If this attribute is not defined returns <b>null</b> (<b>Nothing</b> in Visual Basic)
+    /// Returns the value of attribute of type <see cref="EnumDescriptionAttribute"/> for this enum value. 
+    /// If this attribute is not defined returns <see langword="null"/>.
     /// </summary>
     /// <param name="value">Target enum value.</param>
     /// <returns>
-    /// A <see cref="T:System.String"/> that contains the value of attribute.
+    /// A <see cref="string"/> that contains the value of attribute.
     /// </returns>
     public static string GetPropertyName(this Enum value)
     {
-        Type type = value.GetType();
-        string name = Enum.GetName(type, value);
+        var type = value.GetType();
+        var name = Enum.GetName(type, value);
         if (name == null)
         {
             return null;
         }
 
-        FieldInfo field = type.GetField(name);
+        var field = type.GetField(name);
         if (field == null)
         {
             return null;
@@ -70,29 +66,29 @@ public static class EnumExtensions
     }
 
     /// <summary>
-    /// Returns the value of attribute of type <see cref="T:Syntec.Core.ComponentModel.EnumDescriptionAttribute"/> for this enum value. 
-    /// If this attribute is not defined returns <b>null</b> (<b>Nothing</b> in Visual Basic)
+    /// Returns the value of attribute of type <see cref="EnumDescriptionAttribute"/> for this enum value. 
+    /// If this attribute is not defined returns <see langword="null"/>.
     /// </summary>
     /// <param name="value">Target enum value.</param>
     /// <returns>
-    /// A <see cref="T:System.String"/> that contains the value of attribute.
+    /// A <see cref="string"/> that contains the value of attribute.
     /// </returns>
     public static Type GetPropertyType(this Enum value)
     {
-        Type type = value.GetType();
-        string name = Enum.GetName(type, value);
+        var type = value.GetType();
+        var name = Enum.GetName(type, value);
         if (name == null)
         {
             return null;
         }
 
-        FieldInfo field = type.GetField(name);
+        var field = type.GetField(name);
         if (field == null)
         {
             return null;
         }
 
-        PropertyTypeAttribute attr = Attribute.GetCustomAttribute(field, typeof(PropertyTypeAttribute)) as PropertyTypeAttribute;
+        var attr = Attribute.GetCustomAttribute(field, typeof(PropertyTypeAttribute)) as PropertyTypeAttribute;
         return attr?.PropertyType;
     }
 }

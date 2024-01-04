@@ -12,7 +12,7 @@ public interface IPropertyKey
     /// Gets a value that represents a <see cref="StructureId"/> field from which the value is to be retrieved.
     /// </summary>
     /// <value>
-    /// Field of <see cref="StructureId" /> from which the value will be retrieved.
+    /// Field of <see cref="StructureId"/> from which the value will be retrieved.
     /// </value>
     /// <remarks>
     /// The value of the attribute represents the type of the value linked to this property.
@@ -23,7 +23,7 @@ public interface IPropertyKey
     /// Gets a value that represents the unit in which the property is measured.
     /// </summary>
     /// <value>
-    /// Unidad en que se mide la propiedad.
+    /// Unit in which property is measured.
     /// </value>
     PropertyUnit PropertyUnit { get; }
 

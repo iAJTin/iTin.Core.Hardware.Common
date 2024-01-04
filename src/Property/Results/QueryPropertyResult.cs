@@ -1,5 +1,5 @@
 ﻿
-using System.Collections.Generic;
+using System;
 
 using iTin.Core.ComponentModel;
 
@@ -20,7 +20,8 @@ public class QueryPropertyResult : ResultBase<PropertyItem>
     /// <returns>
     /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed error.
     /// </returns>
-    public static QueryPropertyResult CreateErroResult(string message, string code = "") => CreateErroResult(new IResultError[] { new ResultError { Code = code, Message = message } });
+    public new static QueryPropertyResult CreateErrorResult(string message, string code = "") =>
+        CreateErrorResult([new ResultError { Code = code, Message = message }]);
 
     /// <summary>
     /// Returns a new <see cref="QueryPropertyResult"/> with specified detailed error.
@@ -31,38 +32,37 @@ public class QueryPropertyResult : ResultBase<PropertyItem>
     /// <returns>
     /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed error.
     /// </returns>
-    public static QueryPropertyResult CreateErroResult(string message, PropertyItem result, string code = "") => CreateErroResult(new IResultError[] { new ResultError { Code = code, Message = message } }, result);
+    public new static QueryPropertyResult CreateErrorResult(string message, PropertyItem result, string code = "") =>
+        CreateErrorResult([new ResultError { Code = code, Message = message }], result);
 
     /// <summary>
-    /// Returns a new <see cref="QueryPropertyResult"/> with specified detailed errors collection.
+    /// Returns a new <see cref="QueryPropertyResult"/> with specified detailed errors' collection.
     /// </summary>
     /// <param name="errors">A errors collection</param>
     /// <returns>
-    /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed errors collection.
+    /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed errors' collection.
     /// </returns>
-    public static QueryPropertyResult CreateErroResult(IResultError[] errors) =>
-        new()
-        {
-            Result = default,
-            Success = false,
-            Errors = (IResultError[])errors.Clone()
-        };
+    public new static QueryPropertyResult CreateErrorResult(IResultError[] errors) => new()
+    {
+        Result = default,
+        Success = false,
+        Errors = (IResultError[])errors.Clone()
+    };
 
     /// <summary>
-    /// Returns a new <see cref="QueryPropertyResult"/> with specified detailed errors collection.
+    /// Returns a new <see cref="QueryPropertyResult"/> with specified detailed errors' collection.
     /// </summary>
     /// <param name="errors">A errors collection</param>
     /// <param name="result">Result Result</param>
     /// <returns>
-    /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed errors collection.
+    /// A new invalid <see cref="QueryPropertyResult"/> with specified detailed errors' collection.
     /// </returns>
-    public static QueryPropertyResult CreateErroResult(IResultError[] errors, PropertyItem result) =>
-        new()
-        {
-            Result = result,
-            Success = false,
-            Errors = (IResultError[])errors.Clone()
-        };
+    public new static QueryPropertyResult CreateErrorResult(IResultError[] errors, PropertyItem result) => new()
+    {
+        Result = result,
+        Success = false,
+        Errors = (IResultError[])errors.Clone()
+    };
 
     /// <summary>
     /// Returns a new success result.
@@ -71,13 +71,12 @@ public class QueryPropertyResult : ResultBase<PropertyItem>
     /// <returns>
     /// A new valid <see cref="QueryPropertyResult"/>.
     /// </returns>
-    public new static QueryPropertyResult CreateSuccessResult(PropertyItem result) =>
-        new()
-        {
-            Result = result,
-            Success = true,
-            Errors = new List<IResultError>()
-        };
+    public new static QueryPropertyResult CreateSuccessResult(PropertyItem result) => new()
+    {
+        Result = result,
+        Success = true,
+        Errors = Array.Empty<IResultError>()
+    };
 
     /// <summary>
     /// Creates a new <see cref="QueryPropertyResult"/> instance from known exception.
@@ -86,7 +85,8 @@ public class QueryPropertyResult : ResultBase<PropertyItem>
     /// <returns>
     /// A new <see cref="QueryPropertyResult"/> instance for specified exception.
     /// </returns>
-    public new static QueryPropertyResult FromException(System.Exception exception) => FromException(exception, default);
+    public new static QueryPropertyResult FromException(Exception exception) =>
+        FromException(exception, default);
 
     /// <summary>
     /// Creates a new <see cref="QueryPropertyResult"/> instance from known exception.
@@ -96,11 +96,10 @@ public class QueryPropertyResult : ResultBase<PropertyItem>
     /// <returns>
     /// A new <see cref="QueryPropertyResult"/> instance for specified exception.
     /// </returns>
-    public new static QueryPropertyResult FromException(System.Exception exception, PropertyItem result) =>
-        new()
-        {
-            Result = result,
-            Success = false,
-            Errors = new List<IResultError> { new ResultExceptionError { Exception = exception } }
-        };
+    public new static QueryPropertyResult FromException(Exception exception, PropertyItem result) => new()
+    {
+        Result = result,
+        Success = false,
+        Errors = new ResultExceptionError { Exception = exception }.Yield()
+    };
 }

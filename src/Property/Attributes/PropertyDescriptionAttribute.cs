@@ -11,7 +11,7 @@ namespace iTin.Core.Hardware.Common;
 public sealed class PropertyDescriptionAttribute : DescriptionAttribute
 {
     /// <summary>
-    /// Initialize a new instance of the <see cref="T:iTin.Core.Hardware.PropertyDescriptionAttribute" /> class by setting a string that defines the property.
+    /// Initialize a new instance of the <see cref="PropertyDescriptionAttribute"/> class by setting a string that defines the property.
     /// </summary>
     /// <param name="description">String that defines the property</param>
     public PropertyDescriptionAttribute(string description) : base(description)

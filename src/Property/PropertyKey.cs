@@ -104,7 +104,7 @@ public readonly struct PropertyKey : IPropertyKey, IEquatable<PropertyKey>
     /// </returns>
     public string GetPropertyName()
     {
-        string name = PropertyId.GetPropertyName();
+        var name = PropertyId.GetPropertyName();
 
         return string.IsNullOrEmpty(name)
             ? PropertyId.ToString()
@@ -140,8 +140,8 @@ public readonly struct PropertyKey : IPropertyKey, IEquatable<PropertyKey>
     /// <summary>
     /// Implements the inequality operator (!=).
     /// </summary>
-    /// <param name="propertyKey1">Operando 1.</param>
-    /// <param name="propertyKey2">Operando 2.</param>
+    /// <param name="propertyKey1">Operand 1.</param>
+    /// <param name="propertyKey2">Operand 2.</param>
     /// <returns>
     /// Returns <strong>true</strong> if <c>propertyKey1</c> it is not equal to <c>propertyKey2</c>; <strong>false</strong> otherwise.
     /// </returns>
@@ -151,21 +151,10 @@ public readonly struct PropertyKey : IPropertyKey, IEquatable<PropertyKey>
 
     #region public override methods
 
-    /// <summary>
-    /// Returns a value that represents the hash code of this structure.
-    /// </summary>
-    /// <returns>
-    /// Hash code of this structure
-    /// </returns>
+    /// <inheritdoc/>
     public override int GetHashCode() => ToString().GetHashCode();
 
-    /// <summary>
-    /// Returns a value that indicates if this structure is equal to another.
-    /// </summary>
-    /// <param name="obj">Structure with which to compare.</param>
-    /// <returns>
-    /// Result of the comparison of equality.
-    /// </returns>
+    /// <inheritdoc/>
     public override bool Equals(object obj)
     {
         if (obj is not PropertyKey other)
@@ -179,12 +168,7 @@ public readonly struct PropertyKey : IPropertyKey, IEquatable<PropertyKey>
             PropertyUnit.Equals(other.PropertyUnit);
     }
 
-    /// <summary>
-    /// Returns a <see cref="T:System.String" /> that represents this instance.
-    /// </summary>
-    /// <returns>
-    /// A <see cref="T:System.String" /> that represents this instance.
-    /// </returns>
+    /// <inheritdoc/>
     public override string ToString() => $"Structure = {StructureId}, Property = {PropertyId}, Unit = {PropertyUnit}";
 
     #endregion
